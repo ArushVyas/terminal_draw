@@ -1,5 +1,4 @@
-# Draw in terminal documentation
-----
+# Terminal draw documentation
 
 ## Classes:
 
