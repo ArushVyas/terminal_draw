@@ -1,4 +1,5 @@
 # Terminal draw documentation
+FAIR WARNING: This may not remain up-to-date with the source code
 
 ## Classes:
 
