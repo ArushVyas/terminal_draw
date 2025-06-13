@@ -33,7 +33,7 @@ Position pos = Vector2(4, 5);
 
 ## Methods:
 
-1. ### `void draw_pixel(unsigned int x_coord, unsigned int y_coord)`:
+- ### `void draw_pixel(unsigned int x_coord, unsigned int y_coord)`:
 
 Draws a pixel at the specified coordinates.
 
@@ -44,7 +44,7 @@ draw_pixel(5, 9); // draws a pixel at (5, 9)
 
 <br>
 
-2. ### `void draw_pixel(Position pos)`:
+- ### `void draw_pixel(Position pos)`:
 
 Draws a pixel at the specified `Position`.
 
@@ -57,11 +57,35 @@ draw_pixel(pos); // draws a pixel at (3, 8)
 
 <br>
 
-3. ### `void draw_line(Position start_point, Position end_point)`:
+- ### `void draw_string(string draw_this_string, unsigned int x_coord, unsigned int y_coord)`:
+
+Draws text (string) starting from the specified location.
+
+**Example**:
+```cpp
+// draws "hello world" starting from (5, 9)
+draw_string("hello world", 5, 9);
+```
+
+<br>
+
+- ### `void draw_string(string draw_this_string, Position pos)`:
+
+Draws text (string) starting from the specified `Position`.
+
+**Example**:
+```cpp
+Position str_pos = Vector2(10, 10);
+
+// draws "hello world" starting from (10, 10)
+draw_string("hello world", str_pos);
+```
+
+<br>
+
+- ### `void draw_line(Position start_point, Position end_point)`:
 
 Draws a line joining two `Position`s.
-
-*NOTE: Order of `Position`s matters! Arrange positions in ascending order.*
 
 **Example**:
 ```cpp
@@ -69,13 +93,28 @@ Position pos_a = Vector2(2, 2);
 Position pos_b = Vector2(5, 6);
 
 draw_line(pos_a, pos_b); // draws a line joining pos_a & pos_b
-
-draw_line(pos_b, pos_a); // This will not draw any line
 ```
 
 <br>
 
-4. ### `void draw_circle(Position centre, int radius, bool filled = false)`:
+- ### `void draw_poly(std::vector <Position> points)`:
+Draws an *open* polygon joining all points in `points` vector.
+
+**Example**:
+```cpp
+std::vector <Position> points_arr = {
+    Vector2(0, 0),
+    Vector2(5, 10),
+    Vector2(10, 5),
+    Vector2(20, 20)
+};
+
+draw_poly(points_arr);
+```
+
+<br>
+
+- ### `void draw_circle(Position centre, int radius, bool filled = false)`:
 
 Draws a circle at specified `centre` `Position` with a given `radius`.
 
