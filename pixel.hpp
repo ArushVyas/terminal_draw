@@ -114,10 +114,17 @@ void draw_poly(std::vector <Position> points) {
 
 void draw_circle(Position centre, int radius, bool filled = false) {
 
-    const int MAX_SEARCH_DISTANCE = 100;
+    const int SEARCH_SPACING = 1;
 
-    for (int i = 0; i < MAX_SEARCH_DISTANCE; i++) {
-        for (int j = 0; j < MAX_SEARCH_DISTANCE; j++) {
+    const int HORIZONTAL_SEARCH_START = centre.x  - radius - SEARCH_SPACING;
+    const int HORIZONTAL_SEARCH_END = centre.x  + radius + SEARCH_SPACING;
+
+    const int VERTICAL_SEARCH_START = centre.y  - radius - SEARCH_SPACING;
+    const int VERTICAL_SEARCH_END = centre.y  + radius + SEARCH_SPACING;
+
+
+    for (int i = HORIZONTAL_SEARCH_START; i < HORIZONTAL_SEARCH_END; i++) {
+        for (int j = VERTICAL_SEARCH_START; j < VERTICAL_SEARCH_END; j++) {
 
             Position current_pixel = Vector2(i, j);
             
