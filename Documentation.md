@@ -1,6 +1,7 @@
 # Terminal draw documentation
 FAIR WARNING: This may not remain up-to-date with the source code
 
+
 ## Classes:
 
 1. ### `Position`:
@@ -27,11 +28,54 @@ Position pos = Vector2(4, 5);
 
 
 
+
 <br><br>
 
 
 
+
+## Types:
+
+- `typedef std::vector <Position> PointsArr;`:
+
+Provides an easier way to define a vector containing `Position`s.
+
+**Example**:
+```cpp
+// instead of writing....
+std::vector <Position> array_of_points = {
+    Vector2(0, 0),
+    Vector2(10, 10),
+    Vector2(20, 30),
+    Vector2(40, 10)
+};
+
+// write....
+PointsArr array_of_points = {
+    Vector2(0, 0),
+    Vector2(10, 10),
+    Vector2(20, 30),
+    Vector2(40, 10)
+};
+```
+
+
+
+
+<br><br>
+
+
+
+
 ## Methods:
+
+- ### `void initialize()`:
+
+⚠ This function does nothing as of now.
+
+Properly initializes the terminal window.
+
+<br>
 
 - ### `void draw_pixel(unsigned int x_coord, unsigned int y_coord)`:
 
@@ -57,7 +101,7 @@ draw_pixel(pos); // draws a pixel at (3, 8)
 
 <br>
 
-- ### `void draw_string(string draw_this_string, unsigned int x_coord, unsigned int y_coord)`:
+- ### `void draw_string(std::string draw_this_string, unsigned int x_coord, unsigned int y_coord)`:
 
 Draws text (string) starting from the specified location.
 
@@ -69,7 +113,7 @@ draw_string("hello world", 5, 9);
 
 <br>
 
-- ### `void draw_string(string draw_this_string, Position pos)`:
+- ### `void draw_string(std::string draw_this_string, Position pos)`:
 
 Draws text (string) starting from the specified `Position`.
 
@@ -97,12 +141,15 @@ draw_line(pos_a, pos_b); // draws a line joining pos_a & pos_b
 
 <br>
 
-- ### `void draw_poly(std::vector <Position> points)`:
-Draws an *open* polygon joining all points in `points` vector.
+- ### `void draw_poly(PointsArr points, bool closed)`:
+
+Draws a polygon joining all points in `PointsArr` vector.
+
+The polygon may be open (`closed = false`) or closed (`closed = true`).
 
 **Example**:
 ```cpp
-std::vector <Position> points_arr = {
+PointsArr points_arr = {
     Vector2(0, 0),
     Vector2(5, 10),
     Vector2(10, 5),
