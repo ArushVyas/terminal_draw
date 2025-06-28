@@ -4,6 +4,9 @@
 using namespace std;
 
 
+
+
+
 // A class that defines a Position in two dimensions
 // Position consists of x and y coordinates
 class Position {
@@ -25,6 +28,19 @@ class Vector2 : public Position {
         y = y_coord;
     }
 };
+
+
+
+// easy way to initialize a vector storing Positions
+typedef std::vector <Position> PointsArr;
+
+
+//! This function does nothing as of now!
+void initialize() {
+    //TODO: initialize the console window to either fullscreen or maximized
+}
+
+
 
 
 // Draws a square block
@@ -104,23 +120,34 @@ void draw_line(Position start_point, Position end_point) {
 }
 
 
-void draw_poly(std::vector <Position> points) {
+void draw_poly(PointsArr points, bool closed) {
 
-    for (int i = 0; i < points.size() - 1; i++) {
-        draw_line(points[i], points[i + 1]);
+    if (closed) {
+
+        for (int i = 0; i < points.size() - 1; i++) {
+            draw_line(points[i], points[i + 1]);
+        }
+        draw_line(points[0], points[points.size() - 1]);
+
+    } else {
+        
+        for (int i = 0; i < points.size() - 1; i++) {
+            draw_line(points[i], points[i + 1]);
+        }
     }
+    
 }
 
 
 void draw_circle(Position centre, int radius, bool filled = false) {
 
-    const int SEARCH_SPACING = 1;
+    const int SEARCH_MARGIN = 1;
 
-    const int HORIZONTAL_SEARCH_START = centre.x  - radius - SEARCH_SPACING;
-    const int HORIZONTAL_SEARCH_END = centre.x  + radius + SEARCH_SPACING;
+    const int HORIZONTAL_SEARCH_START = centre.x  - radius - SEARCH_MARGIN;
+    const int HORIZONTAL_SEARCH_END = centre.x  + radius + SEARCH_MARGIN;
 
-    const int VERTICAL_SEARCH_START = centre.y  - radius - SEARCH_SPACING;
-    const int VERTICAL_SEARCH_END = centre.y  + radius + SEARCH_SPACING;
+    const int VERTICAL_SEARCH_START = centre.y  - radius - SEARCH_MARGIN;
+    const int VERTICAL_SEARCH_END = centre.y  + radius + SEARCH_MARGIN;
 
 
     for (int i = HORIZONTAL_SEARCH_START; i < HORIZONTAL_SEARCH_END; i++) {
