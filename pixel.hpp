@@ -63,7 +63,7 @@ void draw_pixel(Position pos) {
 }
 
 
-void draw_string(string draw_this_string, unsigned int x_coord, unsigned int y_coord) {
+void draw_string(std::string draw_this_string, unsigned int x_coord, unsigned int y_coord) {
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -77,7 +77,7 @@ void draw_string(string draw_this_string, unsigned int x_coord, unsigned int y_c
 }
 
 
-void draw_string(string draw_this_string, Position pos) {
+void draw_string(std::string draw_this_string, Position pos) {
     draw_string(draw_this_string, pos.x, pos.y);
 }
 
@@ -117,10 +117,11 @@ void draw_line(Position start_point, Position end_point) {
             }
         }
     }
+
 }
 
 
-void draw_poly(PointsArr points, bool closed) {
+void draw_poly(PointsArr points, bool closed = false) {
 
     if (closed) {
 
@@ -150,8 +151,8 @@ void draw_circle(Position centre, int radius, bool filled = false) {
     const int VERTICAL_SEARCH_END = centre.y  + radius + SEARCH_MARGIN;
 
 
-    for (int i = HORIZONTAL_SEARCH_START; i < HORIZONTAL_SEARCH_END; i++) {
-        for (int j = VERTICAL_SEARCH_START; j < VERTICAL_SEARCH_END; j++) {
+    for (int i = HORIZONTAL_SEARCH_START; i <= HORIZONTAL_SEARCH_END; i++) {
+        for (int j = VERTICAL_SEARCH_START; j <= VERTICAL_SEARCH_END; j++) {
 
             Position current_pixel = Vector2(i, j);
             
@@ -170,9 +171,27 @@ void draw_circle(Position centre, int radius, bool filled = false) {
             }
         }
     }
+
 }
 
 
+void draw_rect(Position top_left_corner, Position bottom_right_corner, bool filled = false) {
 
+    if (!filled) {
 
+        draw_line(top_left_corner, Vector2(bottom_right_corner.x, top_left_corner.y)); // top edge
+        draw_line(top_left_corner, Vector2(top_left_corner.x, bottom_right_corner.y)); // left edge
+        draw_line(Vector2(top_left_corner.x, bottom_right_corner.y), bottom_right_corner); // bottom edge
+        draw_line(Vector2(bottom_right_corner.x, top_left_corner.y), bottom_right_corner); // right edge
 
+    } else {
+
+        for (int i = top_left_corner.x; i <= bottom_right_corner.x; i++) {
+            for (int j = top_left_corner.y; j <= bottom_right_corner.y; j++) {
+
+                draw_pixel(i, j);
+            }
+        }
+    }
+
+}

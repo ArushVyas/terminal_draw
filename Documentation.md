@@ -141,7 +141,7 @@ draw_line(pos_a, pos_b); // draws a line joining pos_a & pos_b
 
 <br>
 
-- ### `void draw_poly(PointsArr points, bool closed)`:
+- ### `void draw_poly(PointsArr points, bool closed = false)`:
 
 Draws a polygon joining all points in `PointsArr` vector.
 
@@ -173,4 +173,21 @@ Position centre_pos = Vector2(10, 10);
 int radius = 5;
 
 draw_circle(centre_pos, radius, true); // draws a filled circle of radius 5 at (10, 10); 
+```
+
+<br>
+
+- ### `void draw_rect(Position top_left_corner, Position bottom_right_corner, bool filled = false)`:
+
+Draws a rectangle having `top_left_corner` and `bottom_right_corner` specified.
+
+It may or may not be filled.
+
+**Example**:
+```cpp
+Position start_corner = Vector2(1, 1);
+Position end_corner = Vector2(10, 10);
+
+// draws a hollow rectangle starting from (1, 1) and ending at (10, 10)
+draw_rect(start_corner, end_corner, false);
 ```
