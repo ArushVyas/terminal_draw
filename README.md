@@ -13,4 +13,4 @@ That's it! You can now use the header file.
 
 *NOTE: This header file is nowhere near completed. Some features may change in future updates*
 
-For more info on usage, check out the [documentation](/Documentation.md).
+For more info on usage, check out the [documentation]([/Documentation.md](https://github.com/ArushVyas/terminal_draw/wiki/Detailed-usage-guidelines-of-Terminal-Draw)).
