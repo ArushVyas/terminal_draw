@@ -3,7 +3,7 @@ FAIR WARNING: This may not remain up-to-date with the source code
 
 ## Classes:
 
-1. ### `Position`:
+- ### `Position`
 Defines a Position (x, y)
 
 **Example**:
@@ -19,7 +19,7 @@ Position pos2(4, 5);
 
 <br>
 
-2. ### `Color`:
+- ### `Color`
 A class that holds a color value in (r, g, b) format.
 
 `Color` values are in range [0, 255]
@@ -42,9 +42,11 @@ I prefer something like [this website](https://rgbcolorpicker.com/).
 
 
 
-## Types:
+## Types
 
-- `typedef std::vector <Position> PointsArr;`:
+- `PointsArr`
+
+`typedef std::vector <Position> PointsArr;`
 
 Provides an easier way to define a vector containing `Position`s.
 
@@ -69,7 +71,9 @@ PointsArr array_of_points = {
 
 <br>
 
-- `typedef unsigned int uint;`:
+- `uint`
+
+`typedef unsigned int uint;`
 
 `uint` is just a shorthand version of `unsigned int`.
 
@@ -83,7 +87,9 @@ PointsArr array_of_points = {
 
 ## Methods:
 
-- ### `void initialize()`:
+- ### initialize
+
+`void initialize()`
 
 Properly initializes the terminal window on Windows platforms.
 
@@ -92,7 +98,9 @@ Required to enable [virtual terminal processing](https://learn.microsoft.com/en-
 
 <br>
 
-- ### `void draw_pixel(uint x_coord, uint y_coord, Color color = Color(255, 255, 255)) {`:
+- ### draw_pixel
+
+`void draw_pixel(uint x_coord, uint y_coord, Color color = Color(255, 255, 255)) {`
 
 Draws a pixel at the specified coordinates with the specified `color`.
 
@@ -103,7 +111,9 @@ draw_pixel(5, 9, Color(255, 255, 255)); // draws a white pixel at (5, 9)
 
 <br>
 
-- ### `void draw_pixel(Position pos, Color color = Color(255, 255, 255)) {`:
+- ### draw_pixel
+
+`void draw_pixel(Position pos, Color color = Color(255, 255, 255)) {`
 
 Draws a pixel at the specified `Position` with the specified `color`.
 
@@ -116,7 +126,9 @@ draw_pixel(pos, Color(255, 0, 0)); // draws a red pixel at (3, 8)
 
 <br>
 
-- ### `void draw_string(std::string draw_this_string, uint x_coord, uint y_coord, Color bg_color = Color(0, 0, 0), Color fg_color = Color(255, 255, 255))`:
+- ### draw_string
+
+`void draw_string(std::string draw_this_string, uint x_coord, uint y_coord, Color bg_color = Color(0, 0, 0), Color fg_color = Color(255, 255, 255))`
 
 Draws text (string) starting from the specified location with the specified `bg_color` (background color) and `fg_color` (foreground color).
 
@@ -128,7 +140,9 @@ draw_string("hello world", 5, 9, Color(0, 0, 0), Color(0, 255, 0));
 
 <br>
 
-- ### `void draw_string(std::string draw_this_string, Position pos, Color bg_color = Color(0, 0, 0), Color fg_color = Color(255, 255, 255))`:
+- ### draw_string
+
+`void draw_string(std::string draw_this_string, Position pos, Color bg_color = Color(0, 0, 0), Color fg_color = Color(255, 255, 255))`
 
 Draws text (string) starting from the specified `Position` with the specified `bg_color` (background color) and `fg_color` (foreground color).
 
@@ -142,7 +156,9 @@ draw_string("hello world", str_pos, Color(0, 0, 0), Color(0, 0, 255));
 
 <br>
 
-- ### `void draw_line(Position start_point, Position end_point, Color color = Color(255, 255, 255))`:
+- ### draw_line
+
+`void draw_line(Position start_point, Position end_point, Color color = Color(255, 255, 255))`
 
 Draws a line joining two `Position`s with the specified `color`.
 
@@ -156,7 +172,9 @@ draw_line(pos_a, pos_b, Color(227, 28, 149)); // draws a pink-ish line joining p
 
 <br>
 
-- ### `void draw_poly(PointsArr points, bool closed = false, Color color = Color(255, 255, 255))`:
+- ### draw_poly
+
+`void draw_poly(PointsArr points, bool closed = false, Color color = Color(255, 255, 255))`
 
 Draws a polygon joining all points in `PointsArr` vector with the specified `color`.
 
@@ -177,7 +195,9 @@ draw_poly(points_arr, false, Color(78, 227, 28));
 
 <br>
 
-- ### `void draw_circle(Position centre, int radius, bool filled = false, Color color = Color(255, 255, 255))`:
+- ### draw_circle
+
+`void draw_circle(Position centre, int radius, bool filled = false, Color color = Color(255, 255, 255))`
 
 Draws a circle at specified `centre` `Position` with a given `radius` with the specified `color`.
 
@@ -193,7 +213,9 @@ draw_circle(centre_pos, radius, true, Color(255, 181, 0)); // draws an orange-is
 
 <br>
 
-- ### `void draw_rect(Position top_left_corner, Position bottom_right_corner, bool filled = false, Color color = Color(255, 255, 255))`:
+- ### draw_rect
+
+`void draw_rect(Position top_left_corner, Position bottom_right_corner, bool filled = false, Color color = Color(255, 255, 255))`
 
 Draws a rectangle having `top_left_corner` and `bottom_right_corner` specified with the given `color`.
 
