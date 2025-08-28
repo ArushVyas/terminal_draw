@@ -1,4 +1,3 @@
-# Terminal draw documentation
 FAIR WARNING: This may not remain up-to-date with the source code
 
 
@@ -13,18 +12,27 @@ Defines a Position (x, y)
 Position pos;
 pos.x = 4;
 pos.y = 5;
+
+// also creates a Position (4, 5) but is more readable
+Position pos2(4, 5);
 ```
 
 <br>
 
-2. ### `Vector2`:
-A helper class used to define a position easily.
+2. ### `Color`:
+A class that holds a color value in (r, g, b) format.
+
+`Color` values are in range [0, 255]
 
 **Example**:
 ```cpp
-// this also creates a position (4, 5) but is more readable
-Position pos = Vector2(4, 5);
+Color c1(255, 0, 0); // pure red
+Color c2(62, 141, 179); // a nice blue color
 ```
+
+You may refer to external sources to generate a color instead of having to guess the values.
+
+I prefer something like [this website](https://rgbcolorpicker.com/).
 
 
 
@@ -44,20 +52,26 @@ Provides an easier way to define a vector containing `Position`s.
 ```cpp
 // instead of writing....
 std::vector <Position> array_of_points = {
-    Vector2(0, 0),
-    Vector2(10, 10),
-    Vector2(20, 30),
-    Vector2(40, 10)
+    Position(0, 0),
+    Position(10, 10),
+    Position(20, 30),
+    Position(40, 10)
 };
 
 // write....
 PointsArr array_of_points = {
-    Vector2(0, 0),
-    Vector2(10, 10),
-    Vector2(20, 30),
-    Vector2(40, 10)
+    Position(0, 0),
+    Position(10, 10),
+    Position(20, 30),
+    Position(40, 10)
 };
 ```
+
+<br>
+
+- `typedef unsigned int uint;`:
+
+`uint` is just a shorthand version of `unsigned int`.
 
 
 
@@ -71,123 +85,125 @@ PointsArr array_of_points = {
 
 - ### `void initialize()`:
 
-⚠ This function does nothing as of now.
+Properly initializes the terminal window on Windows platforms.
 
-Properly initializes the terminal window.
+Required to enable [virtual terminal processing](https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences) on windows platforms, which the header file uses to set position and color.
+
 
 <br>
 
-- ### `void draw_pixel(unsigned int x_coord, unsigned int y_coord)`:
+- ### `void draw_pixel(uint x_coord, uint y_coord, Color color = Color(255, 255, 255)) {`:
 
-Draws a pixel at the specified coordinates.
+Draws a pixel at the specified coordinates with the specified `color`.
 
 **Example**:
 ```cpp
-draw_pixel(5, 9); // draws a pixel at (5, 9)
+draw_pixel(5, 9, Color(255, 255, 255)); // draws a white pixel at (5, 9)
 ```
 
 <br>
 
-- ### `void draw_pixel(Position pos)`:
+- ### `void draw_pixel(Position pos, Color color = Color(255, 255, 255)) {`:
 
-Draws a pixel at the specified `Position`.
+Draws a pixel at the specified `Position` with the specified `color`.
 
 **Example**:
 ```cpp
-Position pos = Vector2(3, 8);
+Position pos(3, 8);
 
-draw_pixel(pos); // draws a pixel at (3, 8)
+draw_pixel(pos, Color(255, 0, 0)); // draws a red pixel at (3, 8)
 ```
 
 <br>
 
-- ### `void draw_string(std::string draw_this_string, unsigned int x_coord, unsigned int y_coord)`:
+- ### `void draw_string(std::string draw_this_string, uint x_coord, uint y_coord, Color bg_color = Color(0, 0, 0), Color fg_color = Color(255, 255, 255))`:
 
-Draws text (string) starting from the specified location.
+Draws text (string) starting from the specified location with the specified `bg_color` (background color) and `fg_color` (foreground color).
 
 **Example**:
 ```cpp
-// draws "hello world" starting from (5, 9)
-draw_string("hello world", 5, 9);
+// draws "hello world" starting from (5, 9) with black background and green foreground
+draw_string("hello world", 5, 9, Color(0, 0, 0), Color(0, 255, 0));
 ```
 
 <br>
 
-- ### `void draw_string(std::string draw_this_string, Position pos)`:
+- ### `void draw_string(std::string draw_this_string, Position pos, Color bg_color = Color(0, 0, 0), Color fg_color = Color(255, 255, 255))`:
 
-Draws text (string) starting from the specified `Position`.
+Draws text (string) starting from the specified `Position` with the specified `bg_color` (background color) and `fg_color` (foreground color).
 
 **Example**:
 ```cpp
-Position str_pos = Vector2(10, 10);
+Position str_pos(10, 10);
 
-// draws "hello world" starting from (10, 10)
-draw_string("hello world", str_pos);
+// draws "hello world" starting from (10, 10) with black background and blue foreground.
+draw_string("hello world", str_pos, Color(0, 0, 0), Color(0, 0, 255));
 ```
 
 <br>
 
-- ### `void draw_line(Position start_point, Position end_point)`:
+- ### `void draw_line(Position start_point, Position end_point, Color color = Color(255, 255, 255))`:
 
-Draws a line joining two `Position`s.
+Draws a line joining two `Position`s with the specified `color`.
 
 **Example**:
 ```cpp
-Position pos_a = Vector2(2, 2);
-Position pos_b = Vector2(5, 6);
+Position pos_a(2, 2);
+Position pos_b(5, 6);
 
-draw_line(pos_a, pos_b); // draws a line joining pos_a & pos_b
+draw_line(pos_a, pos_b, Color(227, 28, 149)); // draws a pink-ish line joining pos_a & pos_b
 ```
 
 <br>
 
-- ### `void draw_poly(PointsArr points, bool closed = false)`:
+- ### `void draw_poly(PointsArr points, bool closed = false, Color color = Color(255, 255, 255))`:
 
-Draws a polygon joining all points in `PointsArr` vector.
+Draws a polygon joining all points in `PointsArr` vector with the specified `color`.
 
 The polygon may be open (`closed = false`) or closed (`closed = true`).
 
 **Example**:
 ```cpp
 PointsArr points_arr = {
-    Vector2(0, 0),
-    Vector2(5, 10),
-    Vector2(10, 5),
-    Vector2(20, 20)
+    Position(0, 0),
+    Position(5, 10),
+    Position(10, 5),
+    Position(20, 20)
 };
 
-draw_poly(points_arr);
+// draws an open polygon with a green-ish color.
+draw_poly(points_arr, false, Color(78, 227, 28));
 ```
 
 <br>
 
-- ### `void draw_circle(Position centre, int radius, bool filled = false)`:
+- ### `void draw_circle(Position centre, int radius, bool filled = false, Color color = Color(255, 255, 255))`:
 
-Draws a circle at specified `centre` `Position` with a given `radius`.
+Draws a circle at specified `centre` `Position` with a given `radius` with the specified `color`.
 
 It may or may not be filled.
 
 **Example**:
 ```cpp
-Position centre_pos = Vector2(10, 10);
+Position centre_pos(10, 10);
 int radius = 5;
 
-draw_circle(centre_pos, radius, true); // draws a filled circle of radius 5 at (10, 10); 
+draw_circle(centre_pos, radius, true, Color(255, 181, 0)); // draws an orange-ish, filled circle of radius 5 at (10, 10); 
 ```
 
 <br>
 
-- ### `void draw_rect(Position top_left_corner, Position bottom_right_corner, bool filled = false)`:
+- ### `void draw_rect(Position top_left_corner, Position bottom_right_corner, bool filled = false, Color color = Color(255, 255, 255))`:
 
-Draws a rectangle having `top_left_corner` and `bottom_right_corner` specified.
+Draws a rectangle having `top_left_corner` and `bottom_right_corner` specified with the given `color`.
 
 It may or may not be filled.
 
 **Example**:
 ```cpp
-Position start_corner = Vector2(1, 1);
-Position end_corner = Vector2(10, 10);
+Position start_corner(1, 1);
+Position end_corner(10, 10);
 
-// draws a hollow rectangle starting from (1, 1) and ending at (10, 10)
-draw_rect(start_corner, end_corner, false);
+// draws a blue-ish hollow rectangle starting from (1, 1) and ending at (10, 10)
+draw_rect(start_corner, end_corner, false, Color(79, 0, 255));
 ```
